@@ -8,13 +8,14 @@
 </head>
 <body>
     <h1 class="text-center">Leader Board Game</h1>
-    <div class="container position-relative py-2 px-4 border" id="leaderboard">
-        <table class="table table-dark table-hover table-bordered" bg-success>
+    <div class="container position-relative py-2 px-4 border table-responsive-sm" id="leaderboard">
+        <table class="table table-dark table-hover table-bordered">
             <thead>
                 <tr>
                     <th>Rank</th>
                     <th>Player</th>
                     <th>Score</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="leaderbody">
@@ -53,6 +54,7 @@
         <!-- Form Group Ended -->
         <button class="btn btn-primary" id="addPlayerButton">Add Player</button>
         <button class="btn  btn-danger" id="removeplayer">Remove Player</button>
+        <h1 id="errormessage"></h1>
     </div>
     
 
@@ -76,7 +78,8 @@
                 row.innerHTML = `
                 <td> ${index + 1} </td>
                 <td> ${entry.playername} </td>
-                <td> ${entry.score} </td>`
+                <td> ${entry.score} </td>
+                <td> <button class="btn btn-danger btn-sm" onclick="removePlayer(${index})">Delete</button></td>`
                  ;
                 leaderbody.appendChild(row);
             });
@@ -91,23 +94,42 @@
             const pname=document.getElementById("playername");
         const newname=pname.value;
 
-        const pscore=document.getElementById("pscore").value;
-        if (pname && !isNaN(pscore)){
-            const newPlayer = { playername: newname, score: pscore };
+        const pscore=document.getElementById("pscore");
+        const newscore=pscore.value;
+
+        if (newname && newscore.trim()!=="" && !isNaN(newscore)){
+            const newPlayer = { playername: newname, score: newscore };
             leaderarray.push(newPlayer);
             updatetable();
+            
+            document.getElementById("errormessage").innerHTML="Record Added";
+            pname.value="";
+            pscore.value="";
+        
         }
+            else{
+                document.getElementById("errormessage").innerHTML="Either Player Name Or Score Is Missing";
+            }
+        
             
         });
 
-        const removePlayerButton = document.getElementById('removeplayer');
-        removePlayerButton.addEventListener('click', () => {
+        function removePlayer (index){
             if (leaderarray.length > 0) {
-                const removedPlayer = leaderarray.pop();
+                const removePlayer=leaderarray.splice(index,1);
+                document.getElementById("errormessage").innerHTML = `Removed player: ${removePlayer[0].playername}`;
                 updatetable();
+        }
+    }
+
+        // const removePlayerButton = document.getElementById('removeplayer');
+        // removePlayerButton.addEventListener('click', () => {
+        //     if (leaderarray.length > 0) {
+        //         const removedPlayer = leaderarray.pop();
+        //         updatetable();
                
-            }
-        });
+        //     }
+        // });
         updatetable();
   </script>
     
