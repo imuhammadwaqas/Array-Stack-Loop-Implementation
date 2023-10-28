@@ -4,7 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Array Methods</title>
+    <style>
+        .container
+    {
+        text-align: center;
+        
+        margin-top: 10%;
+    }
+        .btn{
+
+            text-align: center;
+            padding: 5px;
+            margin: 5px;
+            background-color: rgb(135, 88, 181);
+            color: #fefefe;
+            font-weight: bold;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 30px;
+
+
+}
+.btn:hover{
+    background-color: #13eb3e;
+    color: black;
+}
+    </style>
+    
 </head>
+<div class="container">
+    <button class="btn" onclick="whileLoop()">Click To Start Array Opertaions</button>
+   <H2>Note: Open Developer Console to see all the oprations on runtime.</H2> 
+</div>
+
 <body>
     <Script>
         
@@ -102,7 +135,9 @@ const filterArray=()=> {
   console.log('City Names with "Khan":', khanCity);
 }
 
+
 // Menu for user interaction
+const whileLoop=()=>{
 while (true) {
   const choice = prompt(
     'Choose an option:\n1. Add City\n2. Remove Last City\n3. Display City\n4. Clear Array\n5. Combine Arrays\n6. Extract a Slice\n7. Modify Array\n8. Map Array\n9. Filter Array\n10. Exit'
@@ -144,6 +179,7 @@ while (true) {
       console.log('Invalid choice. Please try again.');
       break;
   }
+}
 }
 
     </Script>
