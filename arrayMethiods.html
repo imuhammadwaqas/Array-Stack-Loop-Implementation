@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Methods</title>
+</head>
+<body>
+    <Script>
+        
+
+
+// Initialize an empty array to store city names
+
+const cityNames= [];
+
+// Function to add a city name to the end of the array
+const addCity= () =>{
+    const newCity= prompt("Enter a new city name:");
+    if(newCity){
+        cityNames.push(newCity);
+        console.log("Added:", newCity);
+    }
+}
+
+
+// Function to remove the last city name from the array
+const removeLastCity=()=>{
+    if(cityNames.length>0){
+        const removeCity=cityNames.pop();
+        console.log("Removed:",removeCity);
+    }
+    else{
+        console.log("Array is Empty");
+    }
+}
+
+
+// Function to display all city names in the array
+const displayCity= ()=>{
+    console.log("All City Names:", cityNames);
+}
+
+// Function to clear the array
+const clearArray=()=>{
+    cityNames.length=0;
+    console.log("Array Cleared");
+}
+
+
+// Function to combine arrays
+const combineTowCity=()=>{
+    const moreCitiesArray=[];
+    const moreCities=prompt("Enter New City Name:");
+    if(moreCities){
+        moreCitiesArray.push(moreCities);
+       console.log("new city:",moreCities);
+       const combineCities= cityNames.concat(moreCities);
+       console.log("Comined Array:", combineCities);
+    }
+}
+
+
+// Function to extract a portion of the array
+const extractSlice=()=> {
+  const startIndex = parseInt(prompt('Enter the start index:'));
+  const endIndex = parseInt(prompt('Enter the end index:'));
+  if (!isNaN(startIndex) && !isNaN(endIndex)) {
+    const selectedcites = cityNames.slice(startIndex, endIndex);
+    console.log('Selected Cities:', selectedcites);
+  } else {
+    console.log('Invalid input. Please enter valid indexs.');
+  }
+}
+
+// Function to modify the array
+const modifyArray=()=> {
+  const index = parseInt(prompt('Enter the index to modify:'));
+  const newCity = prompt('Enter the new city name:');
+  if (!isNaN(index) && newCity) {
+    cityNames.splice(index, 1, newCity);
+    console.log('Modified City at Index', index);
+  } else {
+    console.log('Invalid input. Please enter a valid index and city name.');
+  }
+}
+
+// Function to create a new array with city name lengths
+const mapArray=()=> {
+  const cityNameLengths = cityNames.map(function (city) {
+    return city.length;
+  });
+  console.log('City Name Lengths:', cityNameLengths);
+}
+
+// Function to find City names with 'Khan'
+const filterArray=()=> {
+    console.log("Note: I put filter on those cities which ends with \"Khan\"");
+  const khanCity = cityNames.filter(function (city) {
+    return city.endsWith('Khan');
+  });
+  console.log('City Names with "Khan":', khanCity);
+}
+
+// Menu for user interaction
+while (true) {
+  const choice = prompt(
+    'Choose an option:\n1. Add City\n2. Remove Last City\n3. Display City\n4. Clear Array\n5. Combine Arrays\n6. Extract a Slice\n7. Modify Array\n8. Map Array\n9. Filter Array\n10. Exit'
+  );
+
+  if (!choice || choice === '10') {
+    break; // Exit the program
+  }
+
+  switch (choice) {
+    case '1':
+      addCity();
+      break;
+    case '2':
+      removeLastCity();
+      break;
+    case '3':
+      displayCity();
+      break;
+    case '4':
+      clearArray();
+      break;
+    case '5':
+      combineTowCity();
+      break;
+    case '6':
+      extractSlice();
+      break;
+    case '7':
+      modifyArray();
+      break;
+    case '8':
+      mapArray();
+      break;
+    case '9':
+      filterArray();
+      break;
+    default:
+      console.log('Invalid choice. Please try again.');
+      break;
+  }
+}
+
+    </Script>
+</body>
+</html>
