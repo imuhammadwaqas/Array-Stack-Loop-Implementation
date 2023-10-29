@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="cars"></h1>
+    <script>
+        let carArrays = [
+	        {name:"GLI", Model:2011,color:"white"},
+	        {name:"toyota", Model:2011,color:"Red"},
+	        {name:"BMW", Model:2011,color:"Black"},
+	        {name:"Mercedis", Model:2011,color:"super-white"}
+
+	         	]; 
+                 let carNames = carArrays.map(function(car) {
+            return car.name;
+        });
+
+        document.getElementById("cars").innerHTML = carNames;
+    </script>
+</body>
+</html>

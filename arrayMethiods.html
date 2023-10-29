@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Array Methods</title>
     <style>
+      body{
+        background-color: #ecc47b;
+      }
         .container
     {
         text-align: center;
         
-        margin-top: 10%;
+        margin-top: 1%;
+       
+    }
+    .side{
+      background-color: lightgray;
+    width: 544px;
+    height: 501px;
+    margin-top: -540px;
+    margin-left: 444px;
     }
         .btn{
 
@@ -22,7 +33,7 @@
             border-radius: 15px;
             border: none;
             cursor: pointer;
-            font-size: 30px;
+            font-size: 14px;
 
 
 }
@@ -34,8 +45,43 @@
     
 </head>
 <div class="container">
-    <button class="btn" onclick="whileLoop()">Click To Start Array Opertaions</button>
-   <H2>Note: Open Developer Console to see all the oprations on runtime.</H2> 
+    <!-- <button class="btn" onclick="whileLoop()">Click To Start Array Opertaions</button> -->
+   <H2>Note: For Better Understanding Open Developer Console to see all the oprations on runtime.</H2> 
+</div>
+<div id="menu">
+ <H2>Choose an option:</H2> <br>
+        <button onclick="addCity()" class="btn">1. Add City</button><br>
+        <Input id="addCity" placeholder="Enter City Name" style="display: none;"></Input><br>
+        <button id="addCitybtn" onclick="addCityInernal()" style="display: none;">Add</button>
+        <button id="hidebtn" onclick="hidebtninp()" style="display: none;">Hide</button>
+
+        <button onclick="removeLastCity()" class="btn" style="display: block;">2. Remove Last City</button><br>
+
+        <button onclick="displayCity()"  class="btn" style="display: block;">3. Display City</button><br>
+
+        <button onclick="combineTowCity()" class="btn">4. Add Provicne</button><br>
+        <Input id="combineinp" placeholder="Enter Province" style="display: none;"></Input><br>
+        <button id="combinebtn" onclick="combineInternalFun()" style="display: none;">Add New Array</button>
+        <button id="combinehidebtn" onclick="combinehidebtn()" style="display: none;">Hide</button>
+
+        <button id="slice" onclick="extractSlice()" class="btn" style="display: block;">5. Extract Slice</button><br>
+
+        <button id="modify" onclick="modifyArray()" class="btn" style="display: block;">6. Modify Array</button>
+        <Input id="modifyinp" placeholder="Enter Modify City name" style="display: none;"></Input><br>
+        <button id="modifybtn" onclick="modifyArrayInternalFun()" style="display: none;">Add New Value</button>
+        <button id="modifyhidebtn" onclick="modifyhidebtn()" style="display: none;">Hide</button>
+
+        <button id="map" onclick="mapArray()" class="btn" style="display: block;">7. Map Array</button><br>
+
+        <button id="slice" onclick="filterArray()" class="btn" style="display: block;">8. Filter Array</button><br>
+
+        <button id="clear" onclick="clearArray()" class="btn" style="display: block;">9. Clear Array</button><br>
+
+        
+</div>
+<div class="side">
+  <h3 id="displayCityNames"></h3>
+  <h3 id="note"></h3>
 </div>
 
 <body>
@@ -49,22 +95,34 @@ const cityNames= [];
 
 // Function to add a city name to the end of the array
 const addCity= () =>{
-    const newCity= prompt("Enter a new city name:");
-    if(newCity){
-        cityNames.push(newCity);
-        console.log("Added:", newCity);
-    }
+    const newCity= document.getElementById("addCity").style.display='block';
+    const newCitybtn= document.getElementById("addCitybtn").style.display='inline-block';
+    const newHidebtn= document.getElementById("hidebtn").style.display='inline-block';
 }
-
+const addCityInernal=()=>{
+      const newCityNameEnterd=document.getElementById("addCity").value.trim();
+    if(newCityNameEnterd){
+        cityNames.push(newCityNameEnterd);
+        console.log("Added:", newCityNameEnterd);
+        document.getElementById("displayCityNames").innerHTML=cityNames;
+    }
+  }
+const hidebtninp=()=>{
+  const newCity= document.getElementById("addCity").style.display='none';
+    const newCitybtn= document.getElementById("addCitybtn").style.display='none';
+    const newHidebtn= document.getElementById("hidebtn").style.display='none';
+}
 
 // Function to remove the last city name from the array
 const removeLastCity=()=>{
     if(cityNames.length>0){
         const removeCity=cityNames.pop();
         console.log("Removed:",removeCity);
+        document.getElementById("displayCityNames").innerHTML="Rmoved:"+removeCity;
     }
     else{
         console.log("Array is Empty");
+        document.getElementById("displayCityNames").innerHTML="Array is Empty:"
     }
 }
 
@@ -72,25 +130,42 @@ const removeLastCity=()=>{
 // Function to display all city names in the array
 const displayCity= ()=>{
     console.log("All City Names:", cityNames);
+    document.getElementById("displayCityNames").innerHTML="All City Names:"+ cityNames;
 }
 
 // Function to clear the array
 const clearArray=()=>{
     cityNames.length=0;
     console.log("Array Cleared");
+    document.getElementById("displayCityNames").innerHTML="Array Cleared";
 }
 
 
 // Function to combine arrays
 const combineTowCity=()=>{
-    const moreCitiesArray=[];
-    const moreCities=prompt("Enter New City Name:");
-    if(moreCities){
-        moreCitiesArray.push(moreCities);
-       console.log("new city:",moreCities);
-       const combineCities= cityNames.concat(moreCities);
+  const newCity= document.getElementById("combineinp").style.display='block';
+    const newCitybtn= document.getElementById("combinebtn").style.display='inline-block';
+    const newHidebtn= document.getElementById("combinehidebtn").style.display='inline-block';
+}
+
+const combineInternalFun= ()=>{
+  const moreCitiesArray=[];
+    // const moreCities=prompt("Enter New City Name:");
+    const newproveinceNameEnterd=document.getElementById("combineinp").value.trim();
+  if(newproveinceNameEnterd){
+        moreCitiesArray.push(newproveinceNameEnterd);
+       console.log("new city:",newproveinceNameEnterd);
+       document.getElementById("displayCityNames").innerHTML="Province Name:"+newproveinceNameEnterd;
+       const combineCities= cityNames.concat(newproveinceNameEnterd);
        console.log("Comined Array:", combineCities);
+       document.getElementById("displayCityNames").innerHTML="Comined Array:"+combineCities;
     }
+
+}
+const combinehidebtn=()=>{
+  const newCity= document.getElementById("combineinp").style.display='none';
+    const newCitybtn= document.getElementById("combinebtn").style.display='none';
+    const newHidebtn= document.getElementById("combinehidebtn").style.display='none';
 }
 
 
@@ -101,21 +176,37 @@ const extractSlice=()=> {
   if (!isNaN(startIndex) && !isNaN(endIndex)) {
     const selectedcites = cityNames.slice(startIndex, endIndex);
     console.log('Selected Cities:', selectedcites);
+    document.getElementById("displayCityNames").innerHTML='Selected Cities:'+ selectedcites;
   } else {
     console.log('Invalid input. Please enter valid indexs.');
+    document.getElementById("displayCityNames").innerHTML='Invalid input. Please enter valid indexs.';
   }
 }
 
 // Function to modify the array
 const modifyArray=()=> {
+  const newCity= document.getElementById("modifyinp").style.display='block';
+    const newCitybtn= document.getElementById("modifybtn").style.display='inline-block';
+    const newHidebtn= document.getElementById("modifyhidebtn").style.display='inline-block';
+}
+const modifyArrayInternalFun= ()=>{
   const index = parseInt(prompt('Enter the index to modify:'));
-  const newCity = prompt('Enter the new city name:');
-  if (!isNaN(index) && newCity) {
-    cityNames.splice(index, 1, newCity);
+  // const newCity = prompt('Enter the new city name:');
+  const newCityn = document.getElementById("modifyinp").value.trim();
+  if (!isNaN(index) && newCityn) {
+    cityNames.splice(index, 1, newCityn);
     console.log('Modified City at Index', index);
+    document.getElementById("displayCityNames").innerHTML='Modified City at Index:'+ index+"," +cityNames;
   } else {
     console.log('Invalid input. Please enter a valid index and city name.');
-  }
+    document.getElementById("displayCityNames").innerHTML='Invalid input. Please enter a valid index and city name.';
+
+}
+}
+const modifyhidebtn=()=>{
+  const newCity= document.getElementById("modifyinp").style.display='none';
+    const newCitybtn= document.getElementById("modifybtn").style.display='none';
+    const newHidebtn= document.getElementById("modifyhidebtn").style.display='none';
 }
 
 // Function to create a new array with city name lengths
@@ -124,63 +215,67 @@ const mapArray=()=> {
     return city.length;
   });
   console.log('City Name Lengths:', cityNameLengths);
+  document.getElementById("displayCityNames").innerHTML='City Name Lengths:'+ cityNameLengths;
 }
 
 // Function to find City names with 'Khan'
 const filterArray=()=> {
     console.log("Note: I put filter on those cities which ends with \"Khan\"");
+    document.getElementById("note").innerHTML="Note: I put filter on those cities which ends with \"Khan\"";
+    
   const khanCity = cityNames.filter(function (city) {
     return city.endsWith('Khan');
   });
   console.log('City Names with "Khan":', khanCity);
+  document.getElementById("displayCityNames").innerHTML='City Names with "Khan":'+ khanCity;
 }
 
 
 // Menu for user interaction
-const whileLoop=()=>{
-while (true) {
-  const choice = prompt(
-    'Choose an option:\n1. Add City\n2. Remove Last City\n3. Display City\n4. Clear Array\n5. Combine Arrays\n6. Extract a Slice\n7. Modify Array\n8. Map Array\n9. Filter Array\n10. Exit'
-  );
+// const whileLoop=()=>{
+// // while (true) {
+//   const choice = prompt(
+//     'Choose an option:\n1. Add City\n2. Remove Last City\n3. Display City\n4. Clear Array\n5. Combine Arrays\n6. Extract a Slice\n7. Modify Array\n8. Map Array\n9. Filter Array\n10. Exit'
+//   );
 
-  if (!choice || choice === '10') {
-    break; // Exit the program
-  }
+//   if (!choice || choice === '10') {
+//     break; // Exit the program
+//   }
 
-  switch (choice) {
-    case '1':
-      addCity();
-      break;
-    case '2':
-      removeLastCity();
-      break;
-    case '3':
-      displayCity();
-      break;
-    case '4':
-      clearArray();
-      break;
-    case '5':
-      combineTowCity();
-      break;
-    case '6':
-      extractSlice();
-      break;
-    case '7':
-      modifyArray();
-      break;
-    case '8':
-      mapArray();
-      break;
-    case '9':
-      filterArray();
-      break;
-    default:
-      console.log('Invalid choice. Please try again.');
-      break;
-  }
-}
-}
+//   switch (choice) {
+//     case '1':
+//       addCity();
+//       break;
+//     case '2':
+//       removeLastCity();
+//       break;
+//     case '3':
+//       displayCity();
+//       break;
+//     case '4':
+//       clearArray();
+//       break;
+//     case '5':
+//       combineTowCity();
+//       break;
+//     case '6':
+//       extractSlice();
+//       break;
+//     case '7':
+//       modifyArray();
+//       break;
+//     case '8':
+//       mapArray();
+//       break;
+//     case '9':
+//       filterArray();
+//       break;
+//     default:
+//       console.log('Invalid choice. Please try again.');
+//       break;
+//   }
+// }
+// // }
 
     </Script>
 </body>
