@@ -18,15 +18,15 @@
     .side{
       background-color: lightgray;
     width: 544px;
-    height: 501px;
-    margin-top: -540px;
+    height: 481px;
+    margin-top: -550px;
     margin-left: 444px;
     }
         .btn{
 
             text-align: center;
-            padding: 5px;
-            margin: 5px;
+            padding: 3px;
+            margin: 3px;
             background-color: rgb(135, 88, 181);
             color: #fefefe;
             font-weight: bold;
@@ -77,11 +77,16 @@
 
         <button id="clear" onclick="clearArray()" class="btn" style="display: block;">9. Clear Array</button><br>
 
+        <button id="clear" onclick="spread()" class="btn" style="display: block;">10. Spread Oprator</button><br>
+
+        <button id="clear" onclick="rest()" class="btn" style="display: block;">11. Rest Parameters</button><br>
+
         
 </div>
 <div class="side">
   <h3 id="displayCityNames"></h3>
   <h3 id="note"></h3>
+  <h3 id="spread"></h3>
 </div>
 
 <body>
@@ -230,7 +235,54 @@ const filterArray=()=> {
   document.getElementById("displayCityNames").innerHTML='City Names with "Khan":'+ khanCity;
 }
 
+const spread=()=>{
+const arr1 = [1, 2, 3];
+document.getElementById("displayCityNames").innerHTML='first array":'+ arr1;
 
+const arr2 = [4, 5, 6];
+document.getElementById("note").innerHTML='2nd array":'+ arr2;
+const combinedArray = [...arr1, ...arr2]; // Merge arrays
+
+console.log(combinedArray); // [1, 2, 3, 4, 5, 6]
+document.getElementById("spread").innerHTML='Combine Array/Copy Both arrray ":'+ combinedArray;
+}
+const rest=()=>
+{
+function sum(...numbers) {
+  let total = 0;
+  for (let num of numbers) {
+    total += num;
+  }
+  return total;
+}
+
+const inputNumbers = [];
+let userInput;
+
+do {
+  userInput = prompt("Enter a number (or click Cancel to finish):");
+
+  if (userInput !== null) {
+    const number = parseFloat(userInput);
+
+    if (!isNaN(number)) {
+      inputNumbers.push(number);
+    } else {
+      console.log("Invalid input. Please enter a valid number.");
+    }
+  }
+} while (userInput !== null);
+
+if (inputNumbers.length > 0) {
+  const result = sum(...inputNumbers);
+  console.log("The sum of the entered numbers is: " + result);
+  document.getElementById("displayCityNames").innerHTML="The sum of the entered numbers is: " + result;
+} else {
+  console.log("No valid numbers were entered.");
+  document.getElementById("displayCityNames").innerHTML="No valid numbers were entered.";
+}
+
+}
 // Menu for user interaction
 // const whileLoop=()=>{
 // // while (true) {
